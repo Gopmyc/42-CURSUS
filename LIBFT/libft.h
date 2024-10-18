@@ -18,6 +18,7 @@
 			les une apres les autres (meme si c'est long)
 		- Migrerer toutes les fichiers .c et le .h dans
 			la racine du projet et refaire le Makefile pour qu'il fonctionne
+		- Renomer tous les fichiers .c avec 'ft_' devant (marquée dans la CDC)
 		- Prendre une pause
 		- Suprimer ce commentaire
 		
