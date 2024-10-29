@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 16:36:05 by ghoyaux           #+#    #+#             */
-/*   Updated: 2024/10/28 16:06:24 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/10/29 20:11:51 by ghoyaux           #+#    #+#             */
+/*   Updated: 2024/10/29 21:49:58 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-int	ft_atoi(const char *str)
+char	*get_next_line(int fd)
 {
-	int		nbr;
-	int		sign;
-	size_t	i;
+	char	*line;
+	ssize_t	bytes;
 
-	nbr = 0;
-	sign = 1;
-	i = 0;
-	while (str[i] == ' ' || ('\t' <= str[i] && str[i] <= '\r'))
-		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
+	line = ft_allocate_line(BUFFER_SIZE);
+	if (!line)
+		return (NULL);
+	bytes = ft_read_line(fd, line);
+	if (bytes <= 0)
 	{
-		sign *= -1;
-		i++;
+		free(line);
+		return (NULL);
 	}
-	while ('0' <= str[i] && str[i] <= '9')
-	{
-		nbr = nbr * 10 + str[i] - '0';
-		i++;
-	}
-	return (nbr * sign);
+	return (line);
 }

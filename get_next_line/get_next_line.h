@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 16:36:05 by ghoyaux           #+#    #+#             */
-/*   Updated: 2024/10/28 16:06:24 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/10/29 20:09:07 by ghoyaux           #+#    #+#             */
+/*   Updated: 2024/10/29 20:55:22 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#pragma once
 
-int	ft_atoi(const char *str)
-{
-	int		nbr;
-	int		sign;
-	size_t	i;
+#include <unistd.h>
+#include <stdlib.h>
 
-	nbr = 0;
-	sign = 1;
-	i = 0;
-	while (str[i] == ' ' || ('\t' <= str[i] && str[i] <= '\r'))
-		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
-	{
-		sign *= -1;
-		i++;
-	}
-	while ('0' <= str[i] && str[i] <= '9')
-	{
-		nbr = nbr * 10 + str[i] - '0';
-		i++;
-	}
-	return (nbr * sign);
-}
+#define BUFFER_SIZE 4096
+
+/* Prototypage des fonctions utils : */
+char					*ft_allocate_line(size_t size);
+int						ft_read_line(int fd, char *line);
+
+/* Prototypage de la fonction principale : */
+char					*get_next_line(int fd);
