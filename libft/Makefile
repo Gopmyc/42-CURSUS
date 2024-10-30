@@ -12,7 +12,7 @@ OBJS = ${SRCS:.c=.o}
 
 OBJSALL = ${SRCSALL:.c=.o} 
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -I ./
 

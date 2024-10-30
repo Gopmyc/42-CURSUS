@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:41:25 by ghoyaux           #+#    #+#             */
-/*   Updated: 2024/10/29 22:20:59 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2024/10/30 22:05:07 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("%s\n", line);
+		write(1, line, ft_strlen(line));
 		free(line);
 		line = get_next_line(fd);
 	}
