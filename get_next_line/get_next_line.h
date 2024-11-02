@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:09:07 by ghoyaux           #+#    #+#             */
-/*   Updated: 2024/10/30 22:47:37 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2024/11/02 00:04:47 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 #  define BUFFER 4096
 # endif
 
+/* Utiliser structures pour les variables pour les autres projets */
+
 /* Prototypage des fonctions utils : */
-char					*ft_allocate_line(size_t size);
-int						increment(void);
-size_t					ft_strlen(char *str);
-int						ft_read_line(int fd, char *line);
+size_t					ft_strlen(char	*str);
+int						increment(size_t reset);
+char					*extend_size(char *cpy, size_t size);
+char					*procedure_useless(ssize_t bytes, char *line);
 
 /* Prototypage de la fonction principale : */
 char					*get_next_line(int fd);
