@@ -6,11 +6,11 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 01:53:38 by ghoyaux           #+#    #+#             */
-/*   Updated: 2024/11/11 17:45:46 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2024/11/13 11:11:40 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libft.h"
 
 static int	handle_format(va_list args, char format)
 {

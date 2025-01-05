@@ -6,11 +6,11 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 04:48:54 by ghoyaux           #+#    #+#             */
-/*   Updated: 2024/11/13 12:36:58 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2024/11/14 22:11:35 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libft.h"
 
 int	handle_char(va_list args)
 {
@@ -61,7 +61,7 @@ int	handle_int(va_list args, int is_unsigned)
 			write(1, &buffer[i--], 1);
 	}
 	else
-		len = ft_putnbr_fd((ssize_t)va_arg(args, int), 1);
+		len = ft_putnbrlong_fd((ssize_t)va_arg(args, int), 1);
 	return (len);
 }
 

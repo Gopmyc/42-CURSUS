@@ -6,23 +6,13 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 01:53:43 by ghoyaux           #+#    #+#             */
-/*   Updated: 2024/11/07 06:09:26 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2024/11/16 00:41:35 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libft.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
-
-ssize_t	ft_putnbr_fd(ssize_t n, int fd)
+ssize_t	ft_putnbrlong_fd(ssize_t n, int fd)
 {
 	char	c;
 	ssize_t	len;
@@ -42,7 +32,7 @@ ssize_t	ft_putnbr_fd(ssize_t n, int fd)
 			n = -n;
 		}
 		if (n >= 10)
-			len += ft_putnbr_fd(n / 10, fd);
+			len += ft_putnbrlong_fd(n / 10, fd);
 		c = n % 10 + '0';
 		write(fd, &c, sizeof(char));
 		len++;
