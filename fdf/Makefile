@@ -4,7 +4,7 @@
 
 NAME		=	fdf
 LIBFT		=	libft/
-GNL			=	get_next_line/
+GNL			=	libft/get_next_line/
 MLX			=	minilibx/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)
 GNL_A		=	$(addprefix $(GNL), libgnl.a)
@@ -14,15 +14,15 @@ CC			=	cc
 INCLUDE 	=	includes
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE)
 RM			=	rm -f
+# TODO : review the order
 SRCS		=	fdf.c \
-				srcs/alg_utils.c \
-				srcs/controls.c \
-				srcs/mouse.c \
-				srcs/keyboard.c \
-				srcs/draw.c \
-				srcs/line_alg.c \
-				srcs/project.c \
-				srcs/parse_map.c \
+				srcs/data/map.c \
+				srcs/draw/draw_main.c \
+				srcs/draw/draw_line.c \
+				srcs/inputs/controls.c \
+				srcs/inputs/keys.c \
+				srcs/maths/maths_utiles.c \
+				srcs/maths/maths_matrices.c \
 				srcs/utils.c \
 
 OBJS		=	$(SRCS:%.c=%.o)

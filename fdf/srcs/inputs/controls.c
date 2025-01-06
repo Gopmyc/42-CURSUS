@@ -6,11 +6,11 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 08:39:56 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/05 08:40:01 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/06 08:15:06 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../includes/fdf.h"
 
 int	ft_close_win(void *params)
 {
@@ -22,7 +22,6 @@ int	ft_close_win(void *params)
 	mlx_destroy_image(env->mlx, env->img);
 	mlx_destroy_window(env->mlx, env->win);
 	free(env->camera);
-	free(env->mouse);
 	y = -1;
 	while (++y < env->map->height)
 	{
@@ -41,17 +40,5 @@ int	ft_close_win(void *params)
 void	ft_hook_controls(t_fdf *env)
 {
 	mlx_hook(env->win, 2, 0, ft_key_press, env);
-	mlx_hook(env->win, 4, 0, ft_mouse_down, env);
-	mlx_hook(env->win, 5, 0, ft_mouse_up, env);
-	mlx_hook(env->win, 6, 0, ft_mouse_move, env);
 	mlx_hook(env->win, 17, 0, ft_close_win, env);
-}
-
-double	ft_reset_angles(double angle)
-{
-	if (angle >= M_PI)
-		return (-2 * M_PI - angle);
-	else if (angle <= -M_PI)
-		return (2 * M_PI + angle);
-	return (angle);
 }

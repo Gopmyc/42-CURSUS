@@ -6,11 +6,11 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 08:38:55 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/05 08:38:59 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/06 08:20:49 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
 void	ft_put_pixel(t_fdf *env, int x, int y, int color)
 {
@@ -37,6 +37,7 @@ void	ft_return_error(const char *err_msg, int system_function)
 {
 	if (!system_function)
 	{
+		write(STDERR_FILENO, "FDF : ", 1);
 		while (*err_msg != '\0')
 			write(STDERR_FILENO, err_msg++, 1);
 		write(STDERR_FILENO, "\n", 1);

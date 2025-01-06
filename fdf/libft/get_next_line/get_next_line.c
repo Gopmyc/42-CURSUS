@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/04 11:05:16 by sgoffaux          #+#    #+#             */
-/*   Updated: 2025/01/05 08:57:44 by ghoyaux          ###   ########.fr       */
+/*   Created: 2025/01/06 06:57:52 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/06 08:19:04 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* GNL inspired by : https://github.com/goffauxs/fdf/tree/main/get_next_line */
 
-#include "../includes/gnl.h"
+#include "../../includes/gnl.h"
 
 static char	*ft_malloc_size(char **line, char *buf)
 {

@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alg_utils.c                                        :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 08:40:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/05 08:40:14 by ghoyaux          ###   ########.fr       */
+/*   Created: 2025/01/06 07:07:43 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/06 08:15:02 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../includes/fdf.h"
 
-float	ft_abs(float n)
+int	ft_key_press(int keycode, void *params)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
-}
+	t_fdf	*env;
 
-int	ft_ipart(float n)
-{
-	return ((int)n);
-}
-
-float	ft_fpart(float n)
-{
-	if (n > 0.f)
-		return (n - ft_ipart(n));
-	return (n - (ft_ipart(n) + 1.f));
-}
-
-float	ft_rfpart(float n)
-{
-	return (1.f - ft_fpart(n));
+	env = (t_fdf *)params;
+	if (keycode == ESCAPE)
+		ft_close_win(env);
+	ft_draw(env->map, env);
+	return (0);
 }

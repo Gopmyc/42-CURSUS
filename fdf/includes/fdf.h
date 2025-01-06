@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/21 15:10:10 by sgoffaux          #+#    #+#             */
-/*   Updated: 2025/01/05 08:58:42 by ghoyaux          ###   ########.fr       */
+/*   Created: 2025/01/06 06:58:08 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/06 08:39:11 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,6 @@
 # define WIDTH 800
 # define HEIGHT 600
 
-# define ARROW_LEFT 123
-# define ARROW_RIGHT 124
-# define ARROW_DOWN 125
-# define ARROW_UP 126
-# define MINUS 27
-# define PLUS 24
-# define SPACE 49
-# define KEY_R 15
-# define MOUSE_CLICK_LEFT 1
-# define MOUSE_CLICK_RIGHT 2
-# define MOUSE_CLICK_MIDDLE 3
-# define MOUSE_WHEEL_UP 4
-# define MOUSE_WHEEL_DOWN 5
 # define ESCAPE 53
 
 typedef struct s_point
@@ -69,15 +56,6 @@ typedef struct s_camera
 	int		iso;
 }				t_camera;
 
-typedef struct s_mouse
-{
-	int		button;
-	int		x;
-	int		y;
-	int		prev_x;
-	int		prev_y;
-}				t_mouse;
-
 typedef struct s_fdf
 {
 	void		*mlx;
@@ -90,37 +68,46 @@ typedef struct s_fdf
 	int			steep;
 	t_map		*map;
 	t_camera	*camera;
-	t_mouse		*mouse;
 }				t_fdf;
 
-void	ft_check_valid(char *filename, t_map *map);
-void	ft_draw(t_map *map, t_fdf *env);
-void	ft_put_pixel(t_fdf *env, int x, int y, int color);
+/* ---- DATA PARTS ---- */
+
+/* Parse map functions : */
+void			ft_check_valid(char *filename, t_map *map);
+
+/* ---- DRAW PARTS ---- */
+
+/* Draw line functions : */
 void	ft_draw_line(t_point s, t_point e, t_fdf *env);
+
+/* Draw main functions : */
+void	ft_draw(t_map *map, t_fdf *env);
+
+/* ---- INPUTS PARTS ---- */
+
+/* Controls functions : */
+void	ft_hook_controls(t_fdf *env);
+int		ft_close_win(void *params);
+
+/* Keys functions : */
+int		ft_key_press(int keycode, void *params);
+
+/* ---- MATHS PARTS ---- */
+
+/* Maths matrices functions :*/
 t_point	project(int x, int y, t_fdf *env);
-int		ft_min(int a, int b);
-int		get_default_color(int z, t_map *map);
-void	ft_return_error(const char *err_msg, int system_function);
-double	ft_reset_angles(double angle);
 
-/*
-Xiaolin Wu line algorithm utils
-*/
-
+/* Maths utiles functions : */
 float	ft_abs(float n);
 int		ft_ipart(float n);
 float	ft_fpart(float n);
 float	ft_rfpart(float n);
 
-/*
-Controls
-*/
 
-void	ft_hook_controls(t_fdf *env);
-int		ft_key_press(int keycode, void *params);
-int		ft_mouse_down(int button, int x, int y, void *params);
-int		ft_mouse_up(int button, int x, int y, void *params);
-int		ft_mouse_move(int x, int y, void *params);
-int		ft_close_win(void *params);
+/* Utils functions : */
+int		ft_min(int a, int b);
+int		get_default_color(int z, t_map *map);
+void	ft_return_error(const char *err_msg, int system_function);
+void	ft_put_pixel(t_fdf *env, int x, int y, int color);
 
 #endif
