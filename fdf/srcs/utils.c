@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 08:38:55 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/06 08:20:49 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/12/13 08:38:55 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/07 07:24:22 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_return_error(const char *err_msg, int system_function)
 {
 	if (!system_function)
 	{
-		write(STDERR_FILENO, "FDF : ", 1);
+		write(STDERR_FILENO, "FDF : ", 6);
 		while (*err_msg != '\0')
 			write(STDERR_FILENO, err_msg++, 1);
 		write(STDERR_FILENO, "\n", 1);

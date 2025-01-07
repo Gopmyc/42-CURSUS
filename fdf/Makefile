@@ -2,6 +2,8 @@
 #                                  Makefile                                    #
 # **************************************************************************** #
 
+# MAKEFILE by CHATGPT ;)
+
 NAME		=	fdf
 LIBFT		=	libft/
 GNL			=	libft/get_next_line/
@@ -14,12 +16,12 @@ CC			=	cc
 INCLUDE 	=	includes
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE)
 RM			=	rm -f
-# TODO : review the order
-SRCS		=	fdf.c \
+
+SRCS		=	srcs/main.c \
 				srcs/data/map.c \
 				srcs/draw/draw_main.c \
 				srcs/draw/draw_line.c \
-				srcs/inputs/controls.c \
+				srcs/inputs/hooks.c \
 				srcs/inputs/keys.c \
 				srcs/maths/maths_utiles.c \
 				srcs/maths/maths_matrices.c \
@@ -27,39 +29,32 @@ SRCS		=	fdf.c \
 
 OBJS		=	$(SRCS:%.c=%.o)
 
-# Règle principale pour générer l'exécutable
 all:			$(NAME)
 
 $(NAME):		$(OBJS) $(LIBFT_A) $(GNL_A) $(MLX_A)
 				@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(GNL) -lgnl -L$(MLX) -lmlx -lX11 -lXext -lXrender -lm -o $(NAME)
 				@echo "L'exécutable \033[0;32mfdf\033[0m a été généré."
 
-# Compilation de libft
 $(LIBFT_A):
 				@$(MAKE) -s -C $(LIBFT)
 				@echo "Libft compilée."
 
-# Compilation de get_next_line
 $(GNL_A):
 				@$(MAKE) -s -C $(GNL)
 				@echo "Get Next Line compilée."
 
-# Compilation de minilibx (Linux)
 $(MLX_A):
 				@$(MAKE) -s -C $(MLX)
 				@echo "Minilibx compilée."
 
-# Règle pour compiler les fichiers .c en .o
 .c.o:
 				@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 				@echo "Compilation de $<."
 
-# Nettoyage des fichiers objets
 localclean:
 				@$(RM) $(OBJS)
 				@echo "Fichiers objets supprimés."
 
-# Nettoyage des fichiers objets et des bibliothèques
 clean:			localclean
 				@$(MAKE) clean -s -C $(LIBFT)
 				@echo "Libft nettoyée."
@@ -68,7 +63,6 @@ clean:			localclean
 				@$(MAKE) clean -s -C $(MLX)
 				@echo "Minilibx nettoyée."
 
-# Nettoyage complet : objets, bibliothèques et exécutable
 fclean:			localclean
 				@$(MAKE) fclean -s -C $(LIBFT)
 				@echo "Libft nettoyée."
@@ -79,8 +73,6 @@ fclean:			localclean
 				@$(RM) $(NAME)
 				@echo "Exécutable supprimé."
 
-# Recompilation complète
 re:				fclean all
 
-# Déclarer ces cibles comme "non des fichiers"
 .PHONY:			all clean fclean re localclean bonus

@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 06:58:08 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/06 08:39:11 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/07 07:32:23 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 # include "gnl.h"
 # include "libft.h"
-# include "mlx.h"
+# include "../minilibx/mlx.h"
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
@@ -24,7 +24,7 @@
 # define WIDTH 800
 # define HEIGHT 600
 
-# define ESCAPE 53
+# define ESCAPE 65307
 
 typedef struct s_point
 {
@@ -78,36 +78,35 @@ void			ft_check_valid(char *filename, t_map *map);
 /* ---- DRAW PARTS ---- */
 
 /* Draw line functions : */
-void	ft_draw_line(t_point s, t_point e, t_fdf *env);
+void			ft_draw_line(t_point s, t_point e, t_fdf *env);
 
 /* Draw main functions : */
-void	ft_draw(t_map *map, t_fdf *env);
+void			ft_draw(t_map *map, t_fdf *env);
 
 /* ---- INPUTS PARTS ---- */
 
-/* Controls functions : */
-void	ft_hook_controls(t_fdf *env);
-int		ft_close_win(void *params);
+/* Hooks functions : */
+void			ft_hook_main(t_fdf *env);
+int				ft_close_win(void *params);
 
 /* Keys functions : */
-int		ft_key_press(int keycode, void *params);
+int				ft_key_press(int keycode, void *params);
 
 /* ---- MATHS PARTS ---- */
 
 /* Maths matrices functions :*/
-t_point	project(int x, int y, t_fdf *env);
+t_point			project(int x, int y, t_fdf *env);
 
 /* Maths utiles functions : */
-float	ft_abs(float n);
-int		ft_ipart(float n);
-float	ft_fpart(float n);
-float	ft_rfpart(float n);
-
+float			ft_abs(float n);
+int				ft_ipart(float n);
+float			ft_fpart(float n);
+float			ft_rfpart(float n);
 
 /* Utils functions : */
-int		ft_min(int a, int b);
-int		get_default_color(int z, t_map *map);
-void	ft_return_error(const char *err_msg, int system_function);
-void	ft_put_pixel(t_fdf *env, int x, int y, int color);
+int				ft_min(int a, int b);
+int				get_default_color(int z, t_map *map);
+void			ft_return_error(const char *err_msg, int system_function);
+void			ft_put_pixel(t_fdf *env, int x, int y, int color);
 
 #endif

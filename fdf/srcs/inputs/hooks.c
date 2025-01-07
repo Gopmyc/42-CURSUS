@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 08:39:56 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/06 08:15:06 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/12/13 08:39:56 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/07 07:33:28 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	ft_close_win(void *params)
 	exit(0);
 }
 
-void	ft_hook_controls(t_fdf *env)
+void	ft_hook_main(t_fdf *env)
 {
-	mlx_hook(env->win, 2, 0, ft_key_press, env);
+	mlx_key_hook(env->win, ft_key_press, env);
 	mlx_hook(env->win, 17, 0, ft_close_win, env);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 08:59:42 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/06 08:43:54 by ghoyaux          ###   ########.fr       */
+/*   Created: 2025/01/07 06:51:13 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/07 07:27:03 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int argc, char *argv[])
 		env->map = ft_map_init();
 		ft_check_valid(argv[1], env->map);
 		env->camera = ft_camera_init(env);
-		ft_hook_controls(env);
+		ft_hook_main(env);
 		ft_draw(env->map, env);
 		mlx_loop(env->mlx);
 	}
