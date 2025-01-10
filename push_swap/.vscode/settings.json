@@ -1,6 +1,10 @@
 {
 	"files.associations": {
 		"push_swap.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"stdarg.h": "c",
+		"unistd.h": "c",
+		"random": "c",
+		"algorithm": "c"
 	}
 }

@@ -1,15 +1,16 @@
 NAME      := push_swap
-CFLAGS     := -Wall -Wextra -Werror 
+CFLAGS     := -Wall -Wextra -Werror -g3
 LIB	:= libft/libft.a
 
 SRC	:=	srcs/main.c \
 		srcs/utiles/utiles.c \
 		srcs/utiles/memory.c \
 		srcs/parse/map.c \
-		srcs/algs/algorithms.c \
 		srcs/algs/base_algs.c \
 		srcs/algs/base.c \
 		srcs/debug/debug_utiles.c \
+		srcs/algs/radix.c \
+		srcs/algs/algorithms.c \
 
 OBJ      := $(SRC:.c=.o)
 
