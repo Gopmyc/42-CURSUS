@@ -6,13 +6,13 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:46:36 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/07 09:06:20 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/10 09:00:43 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	sa(t_list **stack_a)
+int	sa(t_stack **stack_a)
 {
 	if (swap(stack_a) == -1)
 		return (-1);
@@ -20,7 +20,7 @@ int	sa(t_list **stack_a)
 	return (0);
 }
 
-int	sb(t_list **stack_b)
+int	sb(t_stack **stack_b)
 {
 	if (swap(stack_b) == -1)
 		return (-1);
@@ -28,7 +28,7 @@ int	sb(t_list **stack_b)
 	return (0);
 }
 
-int	ss(t_list **stack_a, t_list **stack_b)
+int	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
 		return (-1);
@@ -38,7 +38,7 @@ int	ss(t_list **stack_a, t_list **stack_b)
 	return (0);
 }
 
-int	pa(t_list **stack_a, t_list **stack_b)
+int	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	if (push(stack_a, stack_b) == -1)
 		return (-1);
@@ -46,7 +46,7 @@ int	pa(t_list **stack_a, t_list **stack_b)
 	return (0);
 }
 
-int	pb(t_list **stack_a, t_list **stack_b)
+int	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	if (push(stack_b, stack_a) == -1)
 		return (-1);
@@ -54,7 +54,7 @@ int	pb(t_list **stack_a, t_list **stack_b)
 	return (0);
 }
 
-int	ra(t_list **stack_a)
+int	ra(t_stack **stack_a)
 {
 	if (rotate(stack_a) == -1)
 		return (-1);
@@ -62,7 +62,7 @@ int	ra(t_list **stack_a)
 	return (0);
 }
 
-int	rb(t_list **stack_b)
+int	rb(t_stack **stack_b)
 {
 	if (rotate(stack_b) == -1)
 		return (-1);
@@ -70,7 +70,7 @@ int	rb(t_list **stack_b)
 	return (0);
 }
 
-int	rr(t_list **stack_a, t_list **stack_b)
+int	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
 		return (-1);
@@ -80,7 +80,7 @@ int	rr(t_list **stack_a, t_list **stack_b)
 	return (0);
 }
 
-int	rra(t_list **stack_a)
+int	rra(t_stack **stack_a)
 {
 	if (reverse_rotate(stack_a) == -1)
 		return (-1);
@@ -88,7 +88,7 @@ int	rra(t_list **stack_a)
 	return (0);
 }
 
-int	rrb(t_list **stack_b)
+int	rrb(t_stack **stack_b)
 {
 	if (reverse_rotate(stack_b) == -1)
 		return (-1);
@@ -96,7 +96,7 @@ int	rrb(t_list **stack_b)
 	return (0);
 }
 
-int	rrr(t_list **stack_a, t_list **stack_b)
+int	rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
 		return (-1);

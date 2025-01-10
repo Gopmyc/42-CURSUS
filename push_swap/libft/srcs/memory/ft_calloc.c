@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/10 09:44:42 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/10/14 16:36:05 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/10 09:08:32 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../../includes/libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	void	*array;
+	size_t	i;
 
-	if (argc >= 2)
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (SIZE_MAX / nmemb < size)
+		return (NULL);
+	array = malloc(nmemb * size);
+	if (!array)
+		return (NULL);
+	i = 0;
+	while (i < nmemb * size)
 	{
-		stack_a = ft_memcalloc(sizeof(t_stack));
-		stack_b = ft_memcalloc(sizeof(t_stack));
-		ft_fill_stack(stack_a, argv + 1);
-		ft_debug_stack(stack_a);
+		((unsigned char *)array)[i] = 0;
+		i++;
 	}
-	else
-		ft_error("Erreur d'argument\n");
-	return (0);
+	return (array);
 }

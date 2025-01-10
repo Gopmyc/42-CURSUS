@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/10 09:44:42 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/10/14 16:36:05 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/10 09:08:32 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../../includes/libft.h"
 
-int	main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	char	c;
 
-	if (argc >= 2)
-	{
-		stack_a = ft_memcalloc(sizeof(t_stack));
-		stack_b = ft_memcalloc(sizeof(t_stack));
-		ft_fill_stack(stack_a, argv + 1);
-		ft_debug_stack(stack_a);
-	}
+	if (n == -2147483648)
+		write(fd, "-2147483648", (11 * sizeof(char)));
 	else
-		ft_error("Erreur d'argument\n");
-	return (0);
+	{
+		if (n < 0)
+		{
+			write(fd, "-", sizeof(char));
+			n = -n;
+		}
+		if (n >= 10)
+			ft_putnbr_fd(n / 10, fd);
+		c = n % 10 + '0';
+		write(fd, &c, sizeof(char));
+	}
 }

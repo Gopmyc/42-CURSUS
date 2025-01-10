@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/10 09:44:42 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/10/14 16:36:05 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/10 09:13:06 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../../includes/libft.h"
 
-int	main(int argc, char **argv)
+t_stack	*ft_lstlast(t_stack *lst)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-
-	if (argc >= 2)
+	if (!(lst))
+		return (NULL);
+	while (lst->next)
 	{
-		stack_a = ft_memcalloc(sizeof(t_stack));
-		stack_b = ft_memcalloc(sizeof(t_stack));
-		ft_fill_stack(stack_a, argv + 1);
-		ft_debug_stack(stack_a);
+		lst = lst->next;
 	}
-	else
-		ft_error("Erreur d'argument\n");
-	return (0);
+	return (lst);
 }

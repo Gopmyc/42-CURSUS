@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/10 09:44:42 by ghoyaux          ###   ########.fr       */
+/*   Created: 2025/01/09 11:07:36 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/10 09:59:39 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
-int	main(int argc, char **argv)
+void	ft_fill_stack(t_stack *stack, char **av)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	ssize_t	i;
+	t_stack	*current;
 
-	if (argc >= 2)
+	i = 0;
+	current = stack;
+	while (av[i])
 	{
-		stack_a = ft_memcalloc(sizeof(t_stack));
-		stack_b = ft_memcalloc(sizeof(t_stack));
-		ft_fill_stack(stack_a, argv + 1);
-		ft_debug_stack(stack_a);
+		current->value = ft_atoi(av[i]);
+		current->index = i;
+		if (av[i + 1])
+		{
+			current->next = ft_memcalloc(sizeof(t_stack));
+			current = current->next;
+		}
+		else
+			current->next = NULL;
+		i++;
 	}
-	else
-		ft_error("Erreur d'argument\n");
-	return (0);
 }

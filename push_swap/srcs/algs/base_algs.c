@@ -6,16 +6,16 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:52:48 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/07 09:06:20 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/10 09:00:36 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	swap(t_list **stack)
+int	swap(t_stack **stack)
 {
-	t_list	*head;
-	t_list	*next;
+	t_stack	*head;
+	t_stack	*next;
 	int		tmp_val;
 	int		tmp_index;
 
@@ -34,11 +34,11 @@ int	swap(t_list **stack)
 	return (0);
 }
 
-int	push(t_list **stack_to, t_list **stack_from)
+int	push(t_stack **stack_to, t_stack **stack_from)
 {
-	t_list	*tmp;
-	t_list	*head_to;
-	t_list	*head_from;
+	t_stack	*tmp;
+	t_stack	*head_to;
+	t_stack	*head_from;
 
 	if (ft_lstsize(*stack_from) == 0)
 		return (-1);
@@ -61,10 +61,10 @@ int	push(t_list **stack_to, t_list **stack_from)
 	return (0);
 }
 
-int	rotate(t_list **stack)
+int	rotate(t_stack **stack)
 {
-	t_list	*head;
-	t_list	*tail;
+	t_stack	*head;
+	t_stack	*tail;
 
 	if (ft_lstsize(*stack) < 2)
 		return (-1);
@@ -76,10 +76,10 @@ int	rotate(t_list **stack)
 	return (0);
 }
 
-int	reverse_rotate(t_list **stack)
+int	reverse_rotate(t_stack **stack)
 {
-	t_list	*head;
-	t_list	*tail;
+	t_stack	*head;
+	t_stack	*tail;
 
 	if (ft_lstsize(*stack) < 2)
 		return (-1);

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/10 09:44:42 by ghoyaux          ###   ########.fr       */
+/*   Created: 2024/10/14 16:36:05 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/01/10 09:08:32 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../../includes/libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	size_t	i;
+	size_t	size;
+	char	*array;
 
-	if (argc >= 2)
+	i = 0;
+	size = ft_strlen(s);
+	array = (char *)malloc((size + 1) * sizeof(char));
+	if (!(array))
+		return (NULL);
+	while (s[i])
 	{
-		stack_a = ft_memcalloc(sizeof(t_stack));
-		stack_b = ft_memcalloc(sizeof(t_stack));
-		ft_fill_stack(stack_a, argv + 1);
-		ft_debug_stack(stack_a);
+		array[i] = f(i, s[i]);
+		i++;
 	}
-	else
-		ft_error("Erreur d'argument\n");
-	return (0);
+	array[i] = '\0';
+	return (array);
 }
