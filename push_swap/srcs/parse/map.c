@@ -6,13 +6,13 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:07:36 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/10 10:44:03 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/13 09:35:19 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-ssize_t		ft_fill_stack(t_stack *stack, char **av)
+ssize_t	ft_fill_stack(t_stack *stack, char **av)
 {
 	ssize_t	i;
 	t_stack	*current;

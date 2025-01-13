@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:56:55 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/10 12:55:53 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/13 09:31:50 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h> 
