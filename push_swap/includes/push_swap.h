@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/13 13:37:17 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/15 10:27:18 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			*ft_memcalloc(size_t size);
 void			ft_free_stack(t_stack *stack);
 
 /* --- PARSING PART --- */
-ssize_t			ft_fill_stack(t_stack *stack, char **av);
+ssize_t			ft_fill_stack(t_stack **stack, char **av);
 
 /* Base algorithmes instructions */
 int				swap(t_stack **stack);

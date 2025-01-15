@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:28:52 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/13 13:38:06 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/15 10:15:32 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	ss(t_stack **stack_a, t_stack **stack_b)
 	return (0);
 }
 
+// Takes the first element of one stack and puts it at the top of another | pa and pb
+
 int	push(t_stack **stack_to, t_stack **stack_from)
 {
 	t_stack	*tmp;
@@ -103,6 +105,8 @@ int	pb(t_stack **stack_a, t_stack **stack_b)
 	return (0);
 }
 
+// Shift up all elements of a stack by 1. The first element becomes the last one | ra and rb
+
 int	rotate(t_stack **stack)
 {
 	t_stack	*head;
@@ -143,6 +147,9 @@ int	rr(t_stack **stack_a, t_stack **stack_b)
 	ft_putendl_fd("rr", 1);
 	return (0);
 }
+
+
+// Shifts down all elements of a stack by 1. The last element becomes the first one | rra and rrb
 
 int	reverseRotate(t_stack **stack)
 {
