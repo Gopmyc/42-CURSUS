@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:56:55 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/13 09:31:50 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/17 08:35:39 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_stack
 	int				value;
 	int				index;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }				t_stack;
 
 int						ft_atoi(const char *str);

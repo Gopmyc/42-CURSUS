@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:28:52 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/15 10:15:32 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/17 09:34:23 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,31 @@
 
 int	swap(t_stack **stack)
 {
-	t_stack	*head;
-	t_stack	*next;
-	int		tmp_val;
-	int		tmp_index;
+	t_stack *head;
+	t_stack *next;
+	int tmp_val;
+	int tmp_index;
 
 	if (ft_lstsize(*stack) < 2)
 		return (-1);
+
 	head = *stack;
 	next = head->next;
-	if (!head && !next)
-		ft_error("Error occured while swapping!");
+
 	tmp_val = head->value;
 	tmp_index = head->index;
+
 	head->value = next->value;
 	head->index = next->index;
 	next->value = tmp_val;
 	next->index = tmp_index;
+
+	head->next = next->next;
+	if (next->next)
+		next->next->prev = head;
+	next->prev = NULL;
+	*stack = next;
+
 	return (0);
 }
 
@@ -51,7 +59,7 @@ int	sb(t_stack **stack_b)
 }
 
 int	ss(t_stack **stack_a, t_stack **stack_b)
-{	
+{
 	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
 		return (-1);
 	swap(stack_a);
@@ -59,8 +67,6 @@ int	ss(t_stack **stack_a, t_stack **stack_b)
 	ft_putendl_fd("ss", 1);
 	return (0);
 }
-
-// Takes the first element of one stack and puts it at the top of another | pa and pb
 
 int	push(t_stack **stack_to, t_stack **stack_from)
 {
@@ -70,22 +76,27 @@ int	push(t_stack **stack_to, t_stack **stack_from)
 
 	if (ft_lstsize(*stack_from) == 0)
 		return (-1);
-	head_to = *stack_to;
+
 	head_from = *stack_from;
 	tmp = head_from;
-	head_from = head_from->next;
-	*stack_from = head_from;
-	if (!head_to)
+	*stack_from = head_from->next;
+
+	// Assure que l'élément ajouté est correctement positionné dans la pile "to"
+	if (*stack_to == NULL)
 	{
-		head_to = tmp;
-		head_to->next = NULL;
-		*stack_to = head_to;
+		*stack_to = tmp;
+		tmp->next = NULL;
+		tmp->prev = NULL;
 	}
 	else
 	{
-		tmp->next = head_to;
+		head_to = *stack_to;
 		*stack_to = tmp;
+		tmp->next = head_to;
+		tmp->prev = NULL;
+		head_to->prev = tmp;
 	}
+
 	return (0);
 }
 
@@ -105,20 +116,22 @@ int	pb(t_stack **stack_a, t_stack **stack_b)
 	return (0);
 }
 
-// Shift up all elements of a stack by 1. The first element becomes the last one | ra and rb
 
 int	rotate(t_stack **stack)
 {
-	t_stack	*head;
-	t_stack	*tail;
+	t_stack *head;
+	t_stack *tail;
 
 	if (ft_lstsize(*stack) < 2)
 		return (-1);
+
 	head = *stack;
 	tail = ft_lstlast(head);
 	*stack = head->next;
 	head->next = NULL;
+	head->prev = tail;
 	tail->next = head;
+
 	return (0);
 }
 
@@ -148,29 +161,29 @@ int	rr(t_stack **stack_a, t_stack **stack_b)
 	return (0);
 }
 
-
-// Shifts down all elements of a stack by 1. The last element becomes the first one | rra and rrb
-
 int	reverseRotate(t_stack **stack)
 {
-	t_stack	*head;
-	t_stack	*tail;
+	t_stack *head;
+	t_stack *tail;
 
 	if (ft_lstsize(*stack) < 2)
 		return (-1);
+
 	head = *stack;
 	tail = ft_lstlast(head);
 	while (head)
 	{
 		if (head->next->next == NULL)
 		{
-			 head->next = NULL;
-			 break ;
+			head->next = NULL;
+			break ;
 		}
 		head = head->next;
 	}
 	tail->next = *stack;
 	*stack = tail;
+	tail->prev = NULL;
+
 	return (0);
 }
 
