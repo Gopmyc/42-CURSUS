@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/17 10:27:11 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/20 09:32:26 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ void			print_stack(const char *name, t_stack *stack);
 
 /* Memory function(s) */
 void			*ft_memcalloc(size_t size);
-void			ft_free_stack(t_stack *stack);
+int				ft_free_stack(t_stack *stack);
 
 /* --- PARSING PART --- */
-ssize_t			ft_fill_stack(t_stack **stack, char **av);
+t_stack			*ft_fill_stack(char **av);
 
 /* Base algorithmes instructions */
 int				swap(t_stack **stack);
 int				push(t_stack **stack_to, t_stack **stack_from);
 int				rotate(t_stack **stack);
-int				reverseRotate(t_stack **stack);
+int				reverserotate(t_stack **stack);
 
 int				sa(t_stack **stack_a);
 int				sb(t_stack **stack_b);

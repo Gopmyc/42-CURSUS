@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:39:28 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/15 10:49:13 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/20 09:46:08 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	check_sorted(t_stack *stack, int order)
 			return (0);
 		current = current->next;
 	}
+	ft_putstr_fd("Error\n",1);
 	return (1);
 }
 
@@ -57,15 +58,26 @@ int	get_stack_size(t_stack	*stack)
 	return (size);
 }
 
-void print_stack(const char *name, t_stack *stack)
+void	print_stack(const char *name, t_stack *stack)
 {
-    t_stack *current = stack;
+	t_stack	*current;
 
-    printf("Stack %s:\n", name);
-    while (current)
-    {
-        printf("Value: %d, Index: %d\n", current->value, current->index);
-        current = current->next;
-    }
-    printf("\n");
+	current = stack;
+	printf("Stack %s:\n", name);
+	while (current)
+	{
+		printf("Value: %d, Index: %d\n", current->value, current->index);
+		current = current->next;
+	}
+	printf("\n");
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

@@ -3,35 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   small_algs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pthuilli <pthuilli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:05:54 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/15 09:20:23 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/17 17:36:30 by pthuilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void sort_small_stack(t_stack *stack)
+void	sort_small_stack(t_stack *stack)
 {
-    int a = stack->value;
-    int b = stack->next->value;
-    int c = stack->next->next->value;
+	int	a;
+	int	b;
+	int	c;
 
-    if (a > b && b < c && a < c)
-        sa(&stack);
-    else if (a > b && b > c && a > c)
-    {
-        sa(&stack);
-        rra(&stack);
-    }
-    else if (a > b && b < c && a > c)
-        ra(&stack);
-    else if (a < b && b > c && a < c)
-    {
-        sa(&stack);
-        ra(&stack);
-    }
-    else if (a < b && b > c && a > c)
-        rra(&stack);
+	a = stack->value;
+	b = stack->next->value;
+	c = stack->next->next->value;
+	if (a > b && b < c && a < c)
+		sa(&stack);
+	else if (a > b && b > c && a > c)
+	{
+		sa(&stack);
+		rra(&stack);
+	}
+	else if (a > b && b < c && a > c)
+		ra(&stack);
+	else if (a < b && b > c && a < c)
+	{
+		sa(&stack);
+		ra(&stack);
+	}
+	else if (a < b && b > c && a > c)
+		rra(&stack);
 }

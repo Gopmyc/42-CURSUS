@@ -6,12 +6,11 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:07:36 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/17 10:29:12 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/20 10:45:03 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-
 static void	assign_indices(t_stack *stack, int *sorted, ssize_t size)
 {
 	ssize_t	i;
@@ -24,7 +23,7 @@ static void	assign_indices(t_stack *stack, int *sorted, ssize_t size)
 			if (stack->value == sorted[i])
 			{
 				stack->index = i + 1;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -35,18 +34,21 @@ static void	assign_indices(t_stack *stack, int *sorted, ssize_t size)
 static int	*sort_values(char **av, ssize_t size)
 {
 	int		*values;
-	ssize_t	i, j;
+	ssize_t	i;
+	ssize_t	j;
 	int		tmp;
 
 	values = malloc(size * sizeof(int));
 	if (!values)
 		ft_error("Erreur d'allocation mémoire");
+
 	i = 0;
 	while (i < size)
 	{
 		values[i] = ft_atoi(av[i]);
 		i++;
 	}
+
 	i = 0;
 	while (i < size - 1)
 	{
@@ -66,24 +68,26 @@ static int	*sort_values(char **av, ssize_t size)
 	return (values);
 }
 
-ssize_t	ft_fill_stack(t_stack **stack, char **av)
+t_stack	*ft_fill_stack(char **av)
 {
-	ssize_t	i, count;
-	t_stack	*previous, *new_node;
+	t_stack	*stack;
+	t_stack	*previous;
 	int		*sorted;
+	ssize_t	i;
+	int		size;
 
-	count = 0;
-	while (av[count])
-		count++;
-	sorted = sort_values(av, count);
-
-	i = 0;
-	*stack = NULL;
+	stack = NULL;
 	previous = NULL;
-
-	while (i < count)
+	i = 0;
+	size = 0;
+	while (av[size])
+		size++;
+	sorted = sort_values(av, size);
+	if (!sorted)
+		ft_error("Erreur d'allocation pour la mémoire triée");
+	while (av[i])
 	{
-		new_node = malloc(sizeof(t_stack));
+		t_stack *new_node = malloc(sizeof(t_stack));
 		if (!new_node)
 			ft_error("Erreur d'allocation mémoire");
 		new_node->value = ft_atoi(av[i]);
@@ -91,17 +95,16 @@ ssize_t	ft_fill_stack(t_stack **stack, char **av)
 		new_node->prev = previous;
 		new_node->next = NULL;
 
-		if (!*stack)
-			*stack = new_node;
-		if (previous)
+		if (!stack)
+			stack = new_node;
+		else
 			previous->next = new_node;
 
 		previous = new_node;
 		i++;
-		free(new_node);
 	}
-
-	assign_indices(*stack, sorted, count);
+	if (stack)
+		assign_indices(stack, sorted, size);
 	free(sorted);
-	return (count);
+	return (stack);
 }

@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:10:23 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/15 09:40:54 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/20 10:26:54 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memcalloc(size_t size)
 	return (value);
 }
 
-void	ft_free_stack(t_stack *stack)
+int	ft_free_stack(t_stack *stack)
 {
 	t_stack	*tmp;
 
@@ -33,4 +33,5 @@ void	ft_free_stack(t_stack *stack)
 		stack = stack->next;
 		free(tmp);
 	}
+	return (0);
 }
