@@ -27,6 +27,7 @@ LIBC =	srcs/convert/ft_atoi.c \
 		srcs/is/ft_isascii.c \
 		srcs/is/ft_isdigit.c \
 		srcs/is/ft_isprint.c \
+		srcs/is/is_number.c \
 		srcs/memory/ft_memchr.c \
 		srcs/memory/ft_memcmp.c \
 		srcs/memory/ft_memcpy.c \
@@ -42,6 +43,7 @@ LIBC =	srcs/convert/ft_atoi.c \
 		srcs/str/ft_strrchr.c \
 		srcs/convert/ft_tolower.c \
 		srcs/convert/ft_toupper.c  \
+		srcs/convert/ft_atol.c \
 		srcs/str/ft_strrec.c
 
 ADDITIONAL =	srcs/convert/ft_itoa.c \

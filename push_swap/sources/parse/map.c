@@ -6,11 +6,12 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:07:36 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/20 10:45:03 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/21 10:42:32 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
+
 static void	assign_indices(t_stack *stack, int *sorted, ssize_t size)
 {
 	ssize_t	i;
@@ -31,14 +32,14 @@ static void	assign_indices(t_stack *stack, int *sorted, ssize_t size)
 	}
 }
 
-static int	*sort_values(char **av, ssize_t size)
+static int	*sort_values(char **av, ssize_t size, t_mem_manager	*manager)
 {
 	int		*values;
 	ssize_t	i;
 	ssize_t	j;
 	int		tmp;
 
-	values = malloc(size * sizeof(int));
+	values = mem_alloc(manager, size * sizeof(int));
 	if (!values)
 		ft_error("Erreur d'allocation mémoire");
 
@@ -68,7 +69,7 @@ static int	*sort_values(char **av, ssize_t size)
 	return (values);
 }
 
-t_stack	*ft_fill_stack(char **av)
+t_stack	*ft_fill_stack(char **av, t_mem_manager	*manager)
 {
 	t_stack	*stack;
 	t_stack	*previous;
@@ -82,12 +83,12 @@ t_stack	*ft_fill_stack(char **av)
 	size = 0;
 	while (av[size])
 		size++;
-	sorted = sort_values(av, size);
+	sorted = sort_values(av, size, manager);
 	if (!sorted)
 		ft_error("Erreur d'allocation pour la mémoire triée");
 	while (av[i])
 	{
-		t_stack *new_node = malloc(sizeof(t_stack));
+		t_stack *new_node = mem_alloc(manager, sizeof(t_stack));
 		if (!new_node)
 			ft_error("Erreur d'allocation mémoire");
 		new_node->value = ft_atoi(av[i]);
@@ -99,12 +100,10 @@ t_stack	*ft_fill_stack(char **av)
 			stack = new_node;
 		else
 			previous->next = new_node;
-
 		previous = new_node;
 		i++;
 	}
 	if (stack)
 		assign_indices(stack, sorted, size);
-	free(sorted);
 	return (stack);
 }

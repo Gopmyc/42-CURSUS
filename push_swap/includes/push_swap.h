@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/20 09:32:26 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/21 10:38:10 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,40 @@
 # include <stdio.h>
 
 // Commande checker : var="3 4 0 5 6"; ./push_swap $var | ./checker_linux $var
+// gere max int en erreur
+// Gerre nombres neg si pas deja fait
+// Gerre le cas ou il a rien
+// Gerre le cas ou il n'a qu'un nombre
+
+typedef struct s_mem_node
+{
+	void				*address;
+	struct s_mem_node	*next;
+}	t_mem_node;
+
+typedef struct s_mem_manager
+{
+	t_mem_node	*head;
+}	t_mem_manager;
 
 /* --- UTILES PART --- */
 /* Utiles function(s) */
 void			ft_error(char *msg);
-int				check_sorted(t_stack *stack, int order);
+int				check_sorted(char **av, int order);
 int				get_stack_size(t_stack	*stack);
 void			print_stack(const char *name, t_stack *stack);
+int				check_duplicates(char **argv, int argc);
 
 /* Memory function(s) */
-void			*ft_memcalloc(size_t size);
-int				ft_free_stack(t_stack *stack);
+t_mem_manager	*init_mem_manager(void);
+void			*mem_alloc(t_mem_manager *manager, size_t size);
+void			free_all(t_mem_manager *manager);
+void			destroy_mem_manager(t_mem_manager *manager);
+void			ft_free_tbl(char **array, size_t j);
 
 /* --- PARSING PART --- */
-t_stack			*ft_fill_stack(char **av);
+char			**prepare_arguments(char **av, t_mem_manager *manager);
+t_stack			*ft_fill_stack(char **av, t_mem_manager	*manager);
 
 /* Base algorithmes instructions */
 int				swap(t_stack **stack);

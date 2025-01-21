@@ -6,32 +6,74 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:10:23 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/20 10:26:54 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/21 10:37:58 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	*ft_memcalloc(size_t size)
+t_mem_manager	*init_mem_manager(void)
 {
-	void	*value;
+	t_mem_manager	*manager;
 
-	value = (void *)malloc(size);
-	if (!value)
+	manager = (t_mem_manager *)malloc(sizeof(t_mem_manager));
+	if (!manager)
 		return (NULL);
-	ft_memset(value, 0, size);
-	return (value);
+	manager->head = NULL;
+	return (manager);
 }
 
-int	ft_free_stack(t_stack *stack)
+void	*mem_alloc(t_mem_manager *manager, size_t size)
 {
-	t_stack	*tmp;
+	void		*ptr;
+	t_mem_node	*new_node;
 
-	while (stack)
+	if (!manager || size == 0)
+		return (NULL);
+	ptr = malloc(size);
+	if (!ptr)
+		return (NULL);
+	new_node = (t_mem_node *)malloc(sizeof(t_mem_node));
+	if (!new_node)
 	{
-		tmp = stack;
-		stack = stack->next;
+		free(ptr);
+		return (NULL);
+	}
+	new_node->address = ptr;
+	new_node->next = manager->head;
+	manager->head = new_node;
+	return (ptr);
+}
+
+void	free_all(t_mem_manager *manager)
+{
+	t_mem_node	*current;
+	t_mem_node	*tmp;
+
+	if (!manager)
+		return;
+	current = manager->head;
+	while (current)
+	{
+		free(current->address);
+		tmp = current;
+		current = current->next;
 		free(tmp);
 	}
-	return (0);
+	manager->head = NULL;
+}
+
+void	destroy_mem_manager(t_mem_manager *manager)
+{
+	if (!manager)
+		return ;
+	free_all(manager);
+	free(manager);
+}
+
+void	ft_free_tbl(char **array, size_t j)
+{
+	while (j > 0)
+		free(array[--j]);
+	free(array);
 }

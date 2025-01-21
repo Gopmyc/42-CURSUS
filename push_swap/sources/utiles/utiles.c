@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:39:28 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/20 09:46:08 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/21 10:42:02 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,38 @@
 
 void	ft_error(char *msg)
 {
-	write(STDERR_FILENO, "PUSH SWAP : ", 12);
 	while (*msg != '\0')
 		write(STDERR_FILENO, msg++, 1);
 	write(STDERR_FILENO, "\n", 1);
 	exit(-1);
 }
 
-int	check_sorted(t_stack *stack, int order)
+int	check_sorted(char **av, int order)
 {
-	t_stack	*current;
+	int		i;
+	long	prev;
+	long	current;
 
-	if (!stack)
+	if (!av || !av[0])
 		return (1);
-	current = stack;
-	while (current->next)
+	// TODO : check if the first element is a number or a srting and adjust
+	i = 0;
+	prev = ft_atol(av[i++]);
+	if (prev == LONG_MAX)
+		return (0);
+	while (av[i])
 	{
-		if ((order == 0 && current->value > current->next->value)
-			|| (order != 0 && current->value < current->next->value))
+		if (!ft_isnumber(av[i]))
 			return (0);
-		current = current->next;
+		current = ft_atol(av[i]);
+		if (current == LONG_MAX)
+			return (0);
+		if ((order == 0 && prev > current)
+			|| (order != 0 && prev < current))
+			return (0);
+		prev = current;
+		i++;
 	}
-	ft_putstr_fd("Error\n",1);
 	return (1);
 }
 
@@ -58,20 +68,6 @@ int	get_stack_size(t_stack	*stack)
 	return (size);
 }
 
-void	print_stack(const char *name, t_stack *stack)
-{
-	t_stack	*current;
-
-	current = stack;
-	printf("Stack %s:\n", name);
-	while (current)
-	{
-		printf("Value: %d, Index: %d\n", current->value, current->index);
-		current = current->next;
-	}
-	printf("\n");
-}
-
 size_t	ft_strlen(const char *s)
 {
 	int	i;
@@ -80,4 +76,17 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+int check_duplicates(char **argv, int argc)
+{
+	for (int i = 1; i < argc - 1; i++)
+	{
+		for (int j = i + 1; j < argc; j++)
+		{
+			if (strcmp(argv[i], argv[j]) == 0)
+				return (1);
+		}
+	}
+	return (0);
 }

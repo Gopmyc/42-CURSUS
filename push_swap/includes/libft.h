@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:56:55 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/17 08:35:39 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/21 10:14:23 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int						ft_isalpha(int c);
 int						ft_isascii(int c);
 int						ft_isdigit(int c);
 int						ft_isprint(int c);
+int						ft_isnumber(char *str);
 char					*ft_itoa(int n);
+long					ft_atol(const char *str);
 t_stack					*ft_lstlast(t_stack *lst);
 int						ft_lstsize(t_stack *lst);
 void					*ft_memchr(const void *s, int c, size_t n);
