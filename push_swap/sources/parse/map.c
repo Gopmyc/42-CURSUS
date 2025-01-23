@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:07:36 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/21 10:42:32 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:18:44 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	*sort_values(char **av, ssize_t size, t_mem_manager	*manager)
 
 	values = mem_alloc(manager, size * sizeof(int));
 	if (!values)
-		ft_error("Erreur d'allocation mémoire");
+		ft_error();
 
 	i = 0;
 	while (i < size)
@@ -85,12 +85,12 @@ t_stack	*ft_fill_stack(char **av, t_mem_manager	*manager)
 		size++;
 	sorted = sort_values(av, size, manager);
 	if (!sorted)
-		ft_error("Erreur d'allocation pour la mémoire triée");
+		ft_error();
 	while (av[i])
 	{
 		t_stack *new_node = mem_alloc(manager, sizeof(t_stack));
 		if (!new_node)
-			ft_error("Erreur d'allocation mémoire");
+			ft_error();
 		new_node->value = ft_atoi(av[i]);
 		new_node->index = 0;
 		new_node->prev = previous;

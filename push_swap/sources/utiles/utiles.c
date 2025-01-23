@@ -6,17 +6,15 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:39:28 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/21 10:42:02 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:39:48 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	ft_error(char *msg)
+void	ft_error()
 {
-	while (*msg != '\0')
-		write(STDERR_FILENO, msg++, 1);
-	write(STDERR_FILENO, "\n", 1);
+	write(STDERR_FILENO, "Error\n", 6);
 	exit(-1);
 }
 
@@ -27,8 +25,7 @@ int	check_sorted(char **av, int order)
 	long	current;
 
 	if (!av || !av[0])
-		return (1);
-	// TODO : check if the first element is a number or a srting and adjust
+		return (1);t
 	i = 0;
 	prev = ft_atol(av[i++]);
 	if (prev == LONG_MAX)
@@ -78,15 +75,26 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int check_duplicates(char **argv, int argc)
+int	check_duplicates(char **argv)
 {
-	for (int i = 1; i < argc - 1; i++)
+	int	i;
+	int	j;
+	int	current;
+	int	checker;
+
+	i = 0;
+	while (argv[i])
 	{
-		for (int j = i + 1; j < argc; j++)
+		current = atoi(argv[i]);
+		j = i + 1;
+		while (argv[j])
 		{
-			if (strcmp(argv[i], argv[j]) == 0)
+			checker = atoi(argv[j]);
+			if (current == checker)
 				return (1);
+			j++;
 		}
+		i++;
 	}
 	return (0);
 }

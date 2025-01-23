@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/21 10:38:10 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:23:51 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 // Commande checker : var="3 4 0 5 6"; ./push_swap $var | ./checker_linux $var
 // gere max int en erreur
-// Gerre nombres neg si pas deja fait
-// Gerre le cas ou il a rien
-// Gerre le cas ou il n'a qu'un nombre
+// Gerre nombres neg si pas deja fait : FAIT
+// Gerre le cas ou il a rien : FAIT
+// Gerre le cas ou il n'a qu'un nombre : FAIT
 
 typedef struct s_mem_node
 {
@@ -34,11 +34,11 @@ typedef struct s_mem_manager
 
 /* --- UTILES PART --- */
 /* Utiles function(s) */
-void			ft_error(char *msg);
+void			ft_error();
 int				check_sorted(char **av, int order);
 int				get_stack_size(t_stack	*stack);
 void			print_stack(const char *name, t_stack *stack);
-int				check_duplicates(char **argv, int argc);
+int				check_duplicates(char **argv);
 
 /* Memory function(s) */
 t_mem_manager	*init_mem_manager(void);
