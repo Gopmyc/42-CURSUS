@@ -2,22 +2,22 @@ NAME      := push_swap
 CFLAGS     := -Wall -Wextra -Werror -g3
 LIB	:= libft/libft.a
 
-SRC	:=	sources/main.c \
-		sources/utiles/utiles.c \
-		sources/utiles/memory.c \
-		sources/parse/map.c \
-		sources/instructions/base_instructions.c \
-		sources/instructions/push_stack.c \
-		sources/instructions/reverse_rotate_stack.c \
-		sources/instructions/reverse_stack.c \
-		sources/instructions/swap_stack.c \
-		sources/algorithme/radix.c \
-		sources/algorithme/small_algs.c \
+SRC	:=	src/main.c \
+		src/utiles/utiles.c \
+		src/utiles/memory.c \
+		src/parse/map.c \
+		src/instructions/base_instructions.c \
+		src/instructions/push_stack.c \
+		src/instructions/reverse_rotate_stack.c \
+		src/instructions/reverse_stack.c \
+		src/instructions/swap_stack.c \
+		src/algorithme/radix.c \
+		src/algorithme/small_algs.c \
 
 OBJ      := $(SRC:.c=.o)
 
 %.o:            %.c
-		$(CC) $(CFLAGS) -c $< -o $@ -I includes
+		$(CC) $(CFLAGS) -c $< -o $@ -I include
 
 $(NAME):        $(OBJ) $(LIB)
 		cp $(LIB) $(NAME)
