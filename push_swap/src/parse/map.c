@@ -6,16 +6,18 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:07:36 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/27 09:29:11 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/29 08:36:58 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-static void	assign_indices(t_stack *stack, int *sorted, ssize_t size)
+static t_stack	*assign_indices(t_stack *stack, int *sorted, ssize_t size)
 {
+	t_stack	*head;
 	ssize_t	i;
 
+	head = stack;
 	while (stack)
 	{
 		i = 0;
@@ -30,56 +32,49 @@ static void	assign_indices(t_stack *stack, int *sorted, ssize_t size)
 		}
 		stack = stack->next;
 	}
+	return (head);
 }
 
-static int	*sort_values(char **av, ssize_t size, t_mem_manager	*manager)
+static int	*sort_values(char **av, ssize_t size, t_mem_manager *manager)
 {
-	int		*values;
-	ssize_t	i;
-	ssize_t	j;
-	int		tmp;
+	t_sort_values	sort;
 
-	values = mem_alloc(manager, size * sizeof(int));
-	i = 0;
-	if (!values)
+	sort.values = mem_alloc(manager, size * sizeof(int));
+	if (!sort.values)
 		return (0);
-	while (i < size)
+	sort.i = -1;
+	while (++sort.i < size)
+		sort.values[sort.i] = ft_atoi(av[sort.i]);
+	sort.i = -1;
+	while (++sort.i < size - 1)
 	{
-		values[i] = ft_atoi(av[i]);
-		i++;
-	}
-	i = 0;
-	while (i < size - 1)
-	{
-		j = 0;
-		while (j < size - i - 1)
+		sort.j = 0;
+		while (sort.j < size - sort.i - 1)
 		{
-			if (values[j] > values[j + 1])
+			if (sort.values[sort.j] > sort.values[sort.j + 1])
 			{
-				tmp = values[j];
-				values[j] = values[j + 1];
-				values[j + 1] = tmp;
+				sort.tmp = sort.values[sort.j];
+				sort.values[sort.j] = sort.values[sort.j + 1];
+				sort.values[sort.j + 1] = sort.tmp;
 			}
-			j++;
+			sort.j++;
 		}
-		i++;
 	}
-	return (values);
+	return (sort.values);
 }
 
 t_stack	*ft_fill_stack(char **av, t_mem_manager *manager)
 {
-	t_fill fill = {NULL, NULL, NULL, 0, 0, 0, NULL};
+	t_fill	fill;
 
+	fill = (t_fill){NULL, NULL, NULL, -1, 0, 0, NULL};
 	while (av[fill.size])
 		fill.size++;
 	fill.sorted = sort_values(av, fill.size, manager);
-	if (!fill.sorted)
-		return (NULL);
-	while (av[fill.i])
+	while (av[++fill.i])
 	{
 		fill.value = ft_atol(av[fill.i]);
-		if (fill.value > INT_MAX || fill.value < INT_MIN)
+		if ((fill.value > INT_MAX) || (fill.value < INT_MIN))
 			return (NULL);
 		fill.new_node = mem_alloc(manager, sizeof(t_stack));
 		if (!fill.new_node)
@@ -93,8 +88,6 @@ t_stack	*ft_fill_stack(char **av, t_mem_manager *manager)
 		else
 			fill.previous->next = fill.new_node;
 		fill.previous = fill.new_node;
-		fill.i++;
 	}
-	assign_indices(fill.stack, fill.sorted, fill.size);
-	return (fill.stack);
+	return (assign_indices(fill.stack, fill.sorted, fill.size));
 }

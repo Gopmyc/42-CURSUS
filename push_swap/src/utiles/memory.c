@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:10:23 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/27 09:07:59 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/29 08:51:32 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_mem_manager	*init_mem_manager(void)
 
 	manager = (t_mem_manager *)malloc(sizeof(t_mem_manager));
 	if (!manager)
-		return (NULL);
+		ft_error();
 	manager->head = NULL;
 	return (manager);
 }
@@ -63,12 +63,13 @@ void	free_all(t_mem_manager *manager)
 	manager->head = NULL;
 }
 
-void	destroy_mem_manager(t_mem_manager *manager)
+int	destroy_mem_manager(t_mem_manager *manager)
 {
 	if (!manager)
-		return ;
+		return (0);
 	free_all(manager);
 	free(manager);
+	return (0);
 }
 
 void	ft_free_tbl(char **array, size_t j)

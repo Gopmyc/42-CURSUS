@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/27 09:27:20 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/29 08:47:48 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef struct s_main
 	int				is_alloc;
 }	t_main;
 
+typedef struct s_sort_values
+{
+	int		*values;
+	int		tmp;
+	int		i;
+	int		j;
+}	t_sort_values;
 
 typedef struct s_fill
 {
@@ -57,14 +64,13 @@ typedef struct s_fill
 void			ft_error(void);
 int				check_sorted(char **av, int order);
 int				get_stack_size(t_stack	*stack);
-void			print_stack(const char *name, t_stack *stack);
 int				check_duplicates(char **argv);
 
 /* Memory function(s) */
 t_mem_manager	*init_mem_manager(void);
 void			*mem_alloc(t_mem_manager *manager, size_t size);
 void			free_all(t_mem_manager *manager);
-void			destroy_mem_manager(t_mem_manager *manager);
+int				destroy_mem_manager(t_mem_manager *manager);
 void			ft_free_tbl(char **array, size_t j);
 
 /* --- PARSING PART --- */

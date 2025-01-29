@@ -6,18 +6,18 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/27 09:33:42 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/01/29 08:54:56 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static void	free_split(char **array)
+static int	free_split(char **array)
 {
 	size_t	i;
 
 	if (!array)
-		return ;
+		return (0);
 	i = 0;
 	while (array[i])
 	{
@@ -25,10 +25,23 @@ static void	free_split(char **array)
 		i++;
 	}
 	free(array);
+	return (0);
+}
+
+static int	ft_count_size(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i++])
+		;
+	return (i);
 }
 
 static void	start_algo(t_stack *stack_a, t_stack *stack_b, int argc)
 {
+	if (!(stack_a))
+		ft_error();
 	if (argc == 3)
 		sa(&stack_a);
 	else if (argc <= 3)
@@ -50,26 +63,17 @@ int	main(int argc, char **argv)
 		if (!argv)
 			return (0);
 		main_struc.is_alloc = 1;
+		argc = ft_count_size(argv);
 	}
 	else
 		argv++;
 	if (check_duplicates(argv) || check_sorted(argv, 0))
-	{
-		if (main_struc.is_alloc)
-			free_split(argv);
-		return (0);
-	}
-	// ERROR > Show ARGV when arguments are surrounded by quotes or not
+		return (main_struc.is_alloc && free_split(argv), 0);
 	main_struc.manager = init_mem_manager();
-	if (!(main_struc.manager))
-		ft_error();
 	main_struc.stack_a = ft_fill_stack(argv, main_struc.manager);
 	main_struc.stack_b = NULL;
 	if (main_struc.is_alloc)
 		free_split(argv);
-	if (!(main_struc.stack_a))
-		ft_error();
 	start_algo(main_struc.stack_a, main_struc.stack_b, argc);
-	destroy_mem_manager(main_struc.manager);
-	return (0);
+	return (destroy_mem_manager(main_struc.manager));
 }
