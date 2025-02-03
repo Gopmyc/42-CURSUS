@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/29 08:54:56 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/03 10:59:19 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ static void	start_algo(t_stack *stack_a, t_stack *stack_b, int argc)
 {
 	if (!(stack_a))
 		ft_error();
-	if (argc == 3)
-		sa(&stack_a);
-	else if (argc <= 3)
+	else if (argc <= 10)
 		sort_small_stack(stack_a);
 	else
 		ft_radix(&stack_a, &stack_b);
@@ -74,6 +72,6 @@ int	main(int argc, char **argv)
 	main_struc.stack_b = NULL;
 	if (main_struc.is_alloc)
 		free_split(argv);
-	start_algo(main_struc.stack_a, main_struc.stack_b, argc);
+	start_algo(main_struc.stack_a, main_struc.stack_b, --argc);
 	return (destroy_mem_manager(main_struc.manager));
 }
