@@ -12,10 +12,11 @@
 
 #include "../../include/push_swap.h"
 
-void	ft_error(void)
+int	ft_error(void)
 {
 	write(STDERR_FILENO, "Error\n", 6);
 	exit(-1);
+	return (1); 
 }
 
 int	check_sorted(char **av, int order)
@@ -64,16 +65,6 @@ int	get_stack_size(t_stack	*stack)
 	return (size);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 int	check_duplicates(char **argv)
 {
 	int	i;
@@ -96,4 +87,35 @@ int	check_duplicates(char **argv)
 		i++;
 	}
 	return (0);
+}
+
+int	is_sorted(t_stack **stack)
+{
+	t_stack	*head;
+
+	head = *stack;
+	while (head && head->next)
+	{
+		if (head->value > head->next->value)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
+
+int	get_distance(t_stack **stack, int index)
+{
+	t_stack	*head;
+	int		distance;
+
+	distance = 0;
+	head = *stack;
+	while (head)
+	{
+		if (head->index == index)
+			break ;
+		distance++;
+		head = head->next;
+	}
+	return (distance);
 }

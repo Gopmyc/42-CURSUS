@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ghoyaux <ghoyaux@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/03 10:59:19 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:39:53 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	start_algo(t_stack *stack_a, t_stack *stack_b, int argc)
 	if (!(stack_a))
 		ft_error();
 	else if (argc <= 10)
-		sort_small_stack(stack_a);
+		simple_sort(&stack_a, &stack_b);
 	else
 		ft_radix(&stack_a, &stack_b);
 }
@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 	else
 		argv++;
 	if (check_duplicates(argv) || check_sorted(argv, 0))
-		return (main_struc.is_alloc && free_split(argv), 0);
+		return (main_struc.is_alloc && free_split(argv), ft_error());
 	main_struc.manager = init_mem_manager();
 	main_struc.stack_a = ft_fill_stack(argv, main_struc.manager);
 	main_struc.stack_b = NULL;

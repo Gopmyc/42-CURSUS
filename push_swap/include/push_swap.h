@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ghoyaux <ghoyaux@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/29 08:47:48 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:38:28 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ typedef struct s_fill
 
 /* --- UTILES PART --- */
 /* Utiles function(s) */
-void			ft_error(void);
+int				ft_error(void);
 int				check_sorted(char **av, int order);
 int				get_stack_size(t_stack	*stack);
 int				check_duplicates(char **argv);
+int				is_sorted(t_stack **stack);
+int				get_distance(t_stack **stack, int index);
 
 /* Memory function(s) */
 t_mem_manager	*init_mem_manager(void);
@@ -99,6 +101,6 @@ int				rrr(t_stack **stack_a, t_stack **stack_b);
 void			ft_radix(t_stack **stack_a, t_stack **stack_b);
 
 /* Small Algo, for 1 to 3 elements */
-void			sort_small_stack(t_stack *stack);
+void			simple_sort(t_stack **stack_a, t_stack **stack_b);
 
 #endif

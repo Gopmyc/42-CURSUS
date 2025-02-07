@@ -1,5 +1,5 @@
 NAME      := push_swap
-CFLAGS     := -Wall -Wextra -Werror -g3
+CFLAGS     := -Wall -Wextra -g3
 LIB	:= libft/libft.a
 
 SRC	:=	src/main.c \
