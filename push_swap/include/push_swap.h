@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/04 15:38:28 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/10 04:56:37 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ int				rrb(t_stack **stack_b);
 int				rrr(t_stack **stack_a, t_stack **stack_b);
 
 /* Radix function */
-void			ft_radix(t_stack **stack_a, t_stack **stack_b);
+int				ft_find_max_index(t_stack *stack);
+int				ft_find_position(t_stack *stack, int target);
+void			ft_push_back(t_stack **stack_a, t_stack **stack_b);
+void			ft_chunk_sort(t_stack **stack_a, t_stack **stack_b);
 
 /* Small Algo, for 1 to 3 elements */
 void			simple_sort(t_stack **stack_a, t_stack **stack_b);

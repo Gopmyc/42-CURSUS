@@ -6,57 +6,88 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:37:39 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/27 09:07:59 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/10 04:55:44 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-static int	get_max_bits(t_stack **stack)
+int	ft_find_max_index(t_stack *stack)
 {
-	t_stack	*head;
 	int		max;
-	int		max_bits;
+	t_stack	*tmp;
 
-	head = *stack;
-	max = head->index;
-	max_bits = 0;
-	while (head)
+	max = stack->index;
+	tmp = stack;
+	while (tmp)
 	{
-		if (head->index > max)
-			max = head->index;
-		head = head->next;
+		if (tmp->index > max)
+			max = tmp->index;
+		tmp = tmp->next;
 	}
-	while ((max >> max_bits) != 0)
-		max_bits++;
-	return (max_bits);
+	return (max);
 }
 
-void	ft_radix(t_stack **stack_a, t_stack **stack_b)
+int	ft_find_position(t_stack *stack, int target)
 {
-	t_stack	*head_a;
-	int		i;
-	int		j;
-	int		size;
-	int		max_bits;
+	int	pos;
 
-	i = 0;
-	head_a = *stack_a;
-	size = ft_lstsize(head_a);
-	max_bits = get_max_bits(stack_a);
-	while (i < max_bits)
+	pos = 0;
+	while (stack)
 	{
-		j = 0;
-		while (j++ < size)
-		{
-			head_a = *stack_a;
-			if (((head_a->index >> i) & 1) == 1)
-				ra(stack_a);
-			else
-				pb(stack_a, stack_b);
-		}
-		while (ft_lstsize(*stack_b) != 0)
-			pa(stack_a, stack_b);
-		i++;
+		if (stack->index == target)
+			break ;
+		pos++;
+		stack = stack->next;
 	}
+	return (pos);
+}
+
+void	ft_push_back(t_stack **stack_a, t_stack **stack_b)
+{
+	int	pos;
+	int	size;
+	int	max;
+
+	while (*stack_b)
+	{
+		max = ft_find_max_index(*stack_b);
+		pos = ft_find_position(*stack_b, max);
+		size = ft_lstsize(*stack_b);
+		if (pos <= size / 2)
+			while ((*stack_b)->index != max)
+				rb(stack_b);
+		else
+			while ((*stack_b)->index != max)
+				rrb(stack_b);
+		pa(stack_a, stack_b);
+	}
+}
+
+void	ft_chunk_sort(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size;
+	int	chunk;
+	int	current;
+
+	size = ft_lstsize(*stack_a);
+	chunk = size / 5 + (size % 5 ? 1 : 0);
+	current = 0;
+	while (*stack_a)
+	{
+		if ((*stack_a)->index <= current)
+		{
+			pb(stack_a, stack_b);
+			rb(stack_b);
+			current++;
+		}
+		else if ((*stack_a)->index <= current + chunk)
+		{
+			pb(stack_a, stack_b);
+			current++;
+		}
+		else
+			ra(stack_a);
+	}
+	ft_push_back(stack_a, stack_b);
 }
