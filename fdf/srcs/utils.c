@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 08:38:55 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/07 07:24:22 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/19 08:28:00 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	ft_get_z_min_max(t_map *map, int n)
 		map->z_min = n;
 }
 
-void	ft_return_error(const char *err_msg, int system_function)
+void	ft_return_error(const char *err_msg, int system_function, t_fdf *env)
 {
+	ft_close_win(env);
 	if (!system_function)
 	{
 		write(STDERR_FILENO, "FDF : ", 6);

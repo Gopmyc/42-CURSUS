@@ -6,27 +6,19 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 08:29:52 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/05 08:29:52 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/19 09:56:10 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../../includes/libft.h"
 
-static char	**free_table(char **tab, int i)
-{
-	while (i-- > 0)
-		free(tab[i]);
-	free(tab);
-	return (NULL);
-}
-
-static char	*ft_push(const char *s, int begin, int end)
+static char	*ft_push(const char *s, int begin, int end, t_mem_manager *manager)
 {
 	int		i;
 	char	*temp;
 
 	i = 0;
-	temp = malloc(sizeof(*temp) * (end - begin + 1));
+	temp = mem_alloc(manager, sizeof(*temp) * (end - begin + 1));
 	if (!temp)
 		return (NULL);
 	while (begin < end)
@@ -55,7 +47,7 @@ static int	ft_count_words(const char *s, char c)
 	return (count);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(const char *s, char c, t_mem_manager *manager)
 {
 	char	**ret;
 	int		begin;
@@ -64,9 +56,9 @@ char	**ft_split(const char *s, char c)
 
 	if (!s)
 		return (NULL);
-	ret = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	ret = mem_alloc(manager, sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (!ret)
-		return (free_table(ret, 0));
+		return (NULL);
 	i = -1;
 	word = -1;
 	while (s[++i] != '\0')
@@ -75,9 +67,9 @@ char	**ft_split(const char *s, char c)
 			begin = i;
 		if ((i != 0 && s[i] == c && s[i - 1] != c)
 			|| (s[i + 1] == '\0' && s[i] != c))
-			ret[++word] = ft_push(s, begin, i + (s[i] != c));
+			ret[++word] = ft_push(s, begin, i + (s[i] != c), manager);
 		if (word != -1 && !ret[word])
-			return (free_table(ret, word));
+			return (NULL);
 	}
 	ret[++word] = NULL;
 	return (ret);

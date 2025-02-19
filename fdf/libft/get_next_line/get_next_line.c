@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 06:57:52 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/06 08:19:04 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/19 10:04:33 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "../../includes/gnl.h"
 
-static char	*ft_malloc_size(char **line, char *buf)
+static char	*ft_malloc_size(char **line, char *buf, t_mem_manager *manager)
 {
 	char	*ret;
 	int		line_len;
@@ -26,19 +26,19 @@ static char	*ft_malloc_size(char **line, char *buf)
 	buf_len = 0;
 	while (buf[buf_len] && buf[buf_len] != '\n')
 		buf_len++;
-	ret = (char *)malloc(sizeof(char) * (buf_len + line_len + 1));
+	ret = (char *)mem_alloc(manager, sizeof(char) * (buf_len + line_len + 1));
 	if (!ret)
 		return (NULL);
 	return (ret);
 }
 
-static int	ft_add_to_line(char **line, char *buf)
+static int	ft_add_to_line(char **line, char *buf, t_mem_manager *manager)
 {
 	char	*tmp;
 	int		i;
 	int		j;
 
-	tmp = ft_malloc_size(line, buf);
+	tmp = ft_malloc_size(line, buf, manager);
 	if (!tmp)
 		return (-1);
 	i = 0;
@@ -49,7 +49,6 @@ static int	ft_add_to_line(char **line, char *buf)
 	while (buf[j] && buf[j] != '\n')
 		tmp[i++] = buf[j++];
 	tmp[i] = buf[j];
-	free(*line);
 	*line = tmp;
 	i = 0;
 	while (buf[j])
@@ -61,27 +60,20 @@ static int	ft_add_to_line(char **line, char *buf)
 	return (i);
 }
 
-static int	ft_get_next_line(int fd, char **line)
+static int	ft_get_next_line(int fd, char **line, t_mem_manager *manager)
 {
 	static char		buf[FD_MAX][BUFFER_SIZE + 1];
 	int				ret;
 
 	*line = NULL;
-	ret = ft_add_to_line(line, buf[fd]);
+	ret = ft_add_to_line(line, buf[fd], manager);
 	while (ret != -1 && (*line)[ret] != '\n')
 	{
 		ret = read(fd, buf[fd], BUFFER_SIZE);
 		if (ret < 1)
-		{
-			if (ret < 0)
-			{
-				free(*line);
-				*line = NULL;
-			}
 			return (ret);
-		}
 		buf[fd][ret] = '\0';
-		ret = ft_add_to_line(line, buf[fd]);
+		ret = ft_add_to_line(line, buf[fd], manager);
 	}
 	if (ret == -1)
 		return (-1);
@@ -89,9 +81,9 @@ static int	ft_get_next_line(int fd, char **line)
 	return (1);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, t_mem_manager *manager)
 {
 	if (fd < 0 || fd > FD_MAX || !line || BUFFER_SIZE < 1)
 		return (-1);
-	return (ft_get_next_line(fd, line));
+	return (ft_get_next_line(fd, line, manager));
 }

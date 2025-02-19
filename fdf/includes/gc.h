@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.h                                              :+:      :+:    :+:   */
+/*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 08:54:39 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/19 09:19:37 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/19 09:07:02 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* GNL inspired by : https://github.com/goffauxs/fdf/tree/main/get_next_line */
-
-#ifndef GNL_H
-# define GNL_H
+#ifndef GC_H
+# define GC_H
 # include <stdlib.h>
 # include <unistd.h>
-# include "gc.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
-# endif
+typedef struct s_mem_node
+{
+	void				*address;
+	struct s_mem_node	*next;
+}				t_mem_node;
 
-# ifndef FD_MAX
-#  define FD_MAX 8192
-# endif
+typedef struct s_mem_manager
+{
+	t_mem_node	*head;
+}				t_mem_manager;
 
-int	get_next_line(int fd, char **line, t_mem_manager *manager);
+/* Memory function : */
+t_mem_manager	*init_mem_manager(void);
+void			*mem_alloc(t_mem_manager *manager, size_t size);
+void			free_all(t_mem_manager *manager);
+int				destroy_mem_manager(t_mem_manager *manager);
+void			ft_free_tbl(char **array, size_t j);
 
 #endif

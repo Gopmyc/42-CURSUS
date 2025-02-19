@@ -6,12 +6,13 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 06:58:08 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/07 07:32:23 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/19 09:11:47 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+# include "gc.h"
 # include "gnl.h"
 # include "libft.h"
 # include "../minilibx/mlx.h"
@@ -58,22 +59,23 @@ typedef struct s_camera
 
 typedef struct s_fdf
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*data_addr;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	int			steep;
-	t_map		*map;
-	t_camera	*camera;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*data_addr;
+	int				bpp;
+	int				size_line;
+	int				endian;
+	int				steep;
+	t_map			*map;
+	t_camera		*camera;
+	t_mem_manager	*memory_manager;
 }				t_fdf;
 
 /* ---- DATA PARTS ---- */
 
 /* Parse map functions : */
-void			ft_check_valid(char *filename, t_map *map);
+void			ft_check_valid(char *filename, t_fdf *env);
 
 /* ---- DRAW PARTS ---- */
 
@@ -106,7 +108,8 @@ float			ft_rfpart(float n);
 /* Utils functions : */
 int				ft_min(int a, int b);
 int				get_default_color(int z, t_map *map);
-void			ft_return_error(const char *err_msg, int system_function);
+void			ft_return_error(const char *err_msg, int system_function,
+					t_fdf *env);
 void			ft_put_pixel(t_fdf *env, int x, int y, int color);
 
 #endif

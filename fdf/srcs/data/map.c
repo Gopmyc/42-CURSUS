@@ -6,13 +6,13 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 08:39:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/07 07:25:30 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/19 09:54:28 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-static int	ft_get_height(char *filename)
+static int	ft_get_height(char *filename, t_fdf *env)
 {
 	int		fd;
 	int		height;
@@ -20,20 +20,18 @@ static int	ft_get_height(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_return_error("open error", 1);
+		ft_return_error("open error", 1, env);
 	height = 0;
-	while (get_next_line(fd, &line) >= 0 && *line != '\0')
+	while (get_next_line(fd, &line, env->memory_manager) >= 0 && *line != '\0')
 	{
 		height++;
-		free(line);
 	}
-	free(line);
 	if (close(fd) == -1)
-		ft_return_error("close error", 1);
+		ft_return_error("close error", 1, env);
 	return (height);
 }
 
-static int	ft_get_width(char *filename)
+static int	ft_get_width(char *filename, t_fdf *env)
 {
 	int		fd;
 	int		width;
@@ -43,36 +41,32 @@ static int	ft_get_width(char *filename)
 	i = -1;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_return_error("open error", 1);
+		ft_return_error("open error", 1, env);
 	width = 0;
-	get_next_line(fd, &line);
+	get_next_line(fd, &line, env->memory_manager);
 	if (*line == '\0')
-		ft_return_error("invalid map (empty)", 0);
+		ft_return_error("invalid map (empty)", 0, env);
 	while (line[++i])
 		if (line[i] != ' ' && (line[i + 1] == ' ' || line[i + 1] == '\0'))
 			width++;
-	free(line);
-	while (get_next_line(fd, &line))
-		free(line);
-	free(line);
 	if (close(fd) == -1)
-		ft_return_error("close error", 1);
+		ft_return_error("close error", 1, env);
 	return (width);
 }
 
-static void	ft_fill_table(int **n, char *line, int width)
+static void	ft_fill_table(int **n, char *line, int width, t_fdf *env)
 {
 	char	**num;
 	int		i;
 	int		j;
 
-	num = ft_split(line, ' ');
+	num = ft_split(line, ' ', env->memory_manager);
 	i = -1;
 	while (num[++i] && i < width)
 	{
-		n[i] = malloc(sizeof(int) * 3);
+		n[i] = mem_alloc(env->memory_manager, sizeof(int) * 3);
 		if (!n[i])
-			ft_return_error("Map error, memmory allocation failed", 1);
+			ft_return_error("Map error, memmory allocation failed", 1, env);
 		n[i][0] = ft_atoi(num[i]);
 		j = 0;
 		while (num[i][j] && num[i][j] != ',')
@@ -81,11 +75,9 @@ static void	ft_fill_table(int **n, char *line, int width)
 			n[i][1] = ft_atoi_base(&num[i][++j], "0123456789ABCDEF");
 		else
 			n[i][1] = -1;
-		free(num[i]);
 	}
 	if (i != width || num[i])
-		ft_return_error("error: fdf file has irregular width", 0);
-	free(num);
+		ft_return_error("error: fdf file has irregular width", 0, env);
 }
 
 static void	ft_get_z_min_max(t_map *map)
@@ -111,31 +103,31 @@ static void	ft_get_z_min_max(t_map *map)
 	}
 }
 
-void	ft_check_valid(char *filename, t_map *map)
+void	ft_check_valid(char *filename, t_fdf *env)
 {
 	int		fd;
 	char	*line;
 	int		i;
 
-	map->width = ft_get_width(filename);
-	map->height = ft_get_height(filename);
+	env->map->width = ft_get_width(filename, env);
+	env->map->height = ft_get_height(filename, env);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_return_error("Open error", 1);
+		ft_return_error("Open error", 1, env);
 	i = -1;
-	map->array = malloc(sizeof(int **) * map->height);
-	if (!map->array)
-		ft_return_error("Map error, memory allocation failed", 1);
-	while (get_next_line(fd, &line) >= 0 && *line != '\0')
+	env->map->array = mem_alloc(env->memory_manager,
+			sizeof(int **) * env->map->height);
+	if (!(env->map->array))
+		ft_return_error("Map error, memory allocation failed", 1, env);
+	while (get_next_line(fd, &line, env->memory_manager) >= 0 && *line != '\0')
 	{
-		map->array[++i] = malloc(sizeof(int *) * map->width);
-		if (!map->array[i])
-			ft_return_error("Malloc error", 1);
-		ft_fill_table(map->array[i], line, map->width);
-		free(line);
+		env->map->array[++i] = mem_alloc(env->memory_manager,
+				sizeof(int *) * env->map->width);
+		if (!(env->map->array[i]))
+			ft_return_error("Malloc error", 1, env);
+		ft_fill_table(env->map->array[i], line, env->map->width, env);
 	}
-	free(line);
-	ft_get_z_min_max(map);
+	ft_get_z_min_max(env->map);
 	if (close(fd) == -1)
-		ft_return_error("Close error", 1);
+		ft_return_error("Close error", 1, env);
 }

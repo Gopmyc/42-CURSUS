@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 08:39:56 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/07 08:00:12 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/19 10:03:47 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,19 @@
 int	ft_close_win(void *params)
 {
 	t_fdf	*env;
-	int		x;
-	int		y;
 
 	env = (t_fdf *)params;
-	mlx_destroy_image(env->mlx, env->img);
-	mlx_destroy_window(env->mlx, env->win);
-	mlx_destroy_display(env->mlx);
-	free(env->camera);
-	y = -1;
-	while (++y < env->map->height)
+	if (env->img)
+		mlx_destroy_image(env->mlx, env->img);
+	if (env->win)
+		mlx_destroy_window(env->mlx, env->win);
+	if (env->mlx)
 	{
-		x = -1;
-		while (++x < env->map->width)
-			free(env->map->array[y][x]);
-		free(env->map->array[y]);
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
 	}
-	free(env->map->array);
-	free(env->map);
-	free(env->mlx);
+	if (env->memory_manager)
+		destroy_mem_manager(env->memory_manager);
 	free(env);
 	exit(0);
 }
