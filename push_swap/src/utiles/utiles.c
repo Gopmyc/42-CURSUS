@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:39:28 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/01/27 09:07:59 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/21 07:59:53 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	check_duplicates(char **argv)
 		{
 			checker = atoi(argv[j]);
 			if (current == checker)
-				return (1);
+				ft_error();
 			j++;
 		}
 		i++;

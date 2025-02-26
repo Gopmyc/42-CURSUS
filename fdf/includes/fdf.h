@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 06:58:08 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/19 09:11:47 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/26 08:45:24 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # define HEIGHT 600
 
 # define ESCAPE 65307
+
+# define MOUSE_WHEEL_UP 4
+# define MOUSE_WHEEL_DOWN 5
 
 typedef struct s_point
 {
@@ -93,6 +96,9 @@ int				ft_close_win(void *params);
 
 /* Keys functions : */
 int				ft_key_press(int keycode, void *params);
+
+/* Mouse functions : */
+int				ft_mouse(int button, int x, int y, void *params);
 
 /* ---- MATHS PARTS ---- */
 

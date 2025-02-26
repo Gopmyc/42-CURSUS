@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 06:51:13 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/19 09:58:49 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/26 11:30:30 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ int	main(int argc, char *argv[])
 		ft_close_win(env);
 	}
 	else
-		ft_return_error("Usage incorrect : ./fdf <filename>", 0, env);
+		write(1, "Usage: ./fdf <filename>\n", 24);
 }

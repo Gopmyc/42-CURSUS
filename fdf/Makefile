@@ -23,6 +23,7 @@ SRCS		=	srcs/main.c \
 				srcs/draw/draw_line.c \
 				srcs/inputs/hooks.c \
 				srcs/inputs/keys.c \
+				srcs/inputs/mouse.c \
 				srcs/maths/maths_utiles.c \
 				srcs/maths/maths_matrices.c \
 				srcs/utils.c \

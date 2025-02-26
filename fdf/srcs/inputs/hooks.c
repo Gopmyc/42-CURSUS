@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 08:39:56 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/19 10:03:47 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/26 08:58:17 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int	ft_close_win(void *params)
 void	ft_hook_main(t_fdf *env)
 {
 	mlx_key_hook(env->win, ft_key_press, env);
+	mlx_mouse_hook(env->win, ft_mouse, env);
 	mlx_hook(env->win, 17, 0, ft_close_win, env);
 }

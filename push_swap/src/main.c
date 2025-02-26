@@ -6,7 +6,7 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/10 04:56:56 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/21 08:00:11 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_format(char **argv)
 		while (argv[i][j])
 		{
 			if (!(ft_isdigit(argv[i][j])))
-				return (1);
+				ft_error();
 			j++;
 		}
 		i++;
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 	else
 		argv++;
 	if (check_duplicates(argv) || check_sorted(argv, 0) || check_format(argv))
-		return (main_struc.is_alloc && free_split(argv), ft_error());
+		return (main_struc.is_alloc && free_split(argv), 1);
 	main_struc.manager = init_mem_manager();
 	main_struc.stack_a = ft_fill_stack(argv, main_struc.manager);
 	main_struc.stack_b = NULL;
