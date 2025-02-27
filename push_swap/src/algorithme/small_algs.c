@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   small_algs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: ghoyaux <ghoyaux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:05:54 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/04 16:00:42 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/26 21:00:39 by ghoyaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-static int	get_min(t_stack **stack, int val)
+int	get_min(t_stack **stack, int val)
 {
 	t_stack	*head;
 	int		min;
@@ -28,17 +28,9 @@ static int	get_min(t_stack **stack, int val)
 	return (min);
 }
 
-static void	sort_3(t_stack **stack_a)
+void	process_sort_3(t_stack **stack_a, t_stack *head,
+	int min, int next_min)
 {
-	t_stack	*head;
-	int		min;
-	int		next_min;
-
-	head = *stack_a;
-	min = get_min(stack_a, -1);
-	next_min = get_min(stack_a, min);
-	if (is_sorted(stack_a))
-		return ;
 	if (head->index == min && head->next->index != next_min)
 	{
 		ra(stack_a);
@@ -64,7 +56,21 @@ static void	sort_3(t_stack **stack_a)
 	}
 }
 
-static void	sort_4(t_stack **stack_a, t_stack **stack_b)
+void	sort_3(t_stack **stack_a)
+{
+	t_stack	*head;
+	int		min;
+	int		next_min;
+
+	head = *stack_a;
+	min = get_min(stack_a, -1);
+	next_min = get_min(stack_a, min);
+	if (is_sorted(stack_a))
+		return ;
+	process_sort_3(stack_a, head, min, next_min);
+}
+
+void	sort_4(t_stack **stack_a, t_stack **stack_b)
 {
 	int	distance;
 
@@ -111,22 +117,4 @@ void	sort_5(t_stack **stack_a, t_stack **stack_b)
 	pb(stack_a, stack_b);
 	sort_4(stack_a, stack_b);
 	pa(stack_a, stack_b);
-}
-
-void	simple_sort(t_stack **stack_a, t_stack **stack_b)
-{
-	int	size;
-
-	if (is_sorted(stack_a) || ft_lstsize(*stack_a) == 0
-		|| ft_lstsize(*stack_a) == 1)
-		return ;
-	size = ft_lstsize(*stack_a);
-	if (size == 2)
-		sa(stack_a);
-	else if (size == 3)
-		sort_3(stack_a);
-	else if (size == 4)
-		sort_4(stack_a, stack_b);
-	else if (size == 5)
-		sort_5(stack_a, stack_b);
 }

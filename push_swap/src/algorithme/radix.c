@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ghoyaux <ghoyaux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:37:39 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/10 04:55:44 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:36:10 by ghoyaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ void	ft_push_back(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
+static int	ft_get_chunk(int size)
+{
+	int	chunk;
+
+	chunk = size / 5;
+	if (size % 5)
+		chunk++;
+	return (chunk);
+}
+
 void	ft_chunk_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	int	size;
@@ -71,7 +81,7 @@ void	ft_chunk_sort(t_stack **stack_a, t_stack **stack_b)
 	int	current;
 
 	size = ft_lstsize(*stack_a);
-	chunk = size / 5 + (size % 5 ? 1 : 0);
+	chunk = ft_get_chunk(size);
 	current = 0;
 	while (*stack_a)
 	{

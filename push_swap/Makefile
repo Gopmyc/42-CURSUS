@@ -5,6 +5,7 @@ LIB	:= libft/libft.a
 SRC	:=	src/main.c \
 		src/utiles/utiles.c \
 		src/utiles/memory.c \
+		src/utiles/parsing.c \
 		src/parse/map.c \
 		src/instructions/base_instructions.c \
 		src/instructions/push_stack.c \
@@ -13,6 +14,7 @@ SRC	:=	src/main.c \
 		src/instructions/swap_stack.c \
 		src/algorithme/radix.c \
 		src/algorithme/small_algs.c \
+		src/algorithme/simple_sort.c \
 
 OBJ      := $(SRC:.c=.o)
 

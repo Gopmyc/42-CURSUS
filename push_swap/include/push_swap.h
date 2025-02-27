@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ghoyaux <ghoyaux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:25:37 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/10 04:56:37 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/26 21:06:02 by ghoyaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,11 @@ void			ft_chunk_sort(t_stack **stack_a, t_stack **stack_b);
 
 /* Small Algo, for 1 to 3 elements */
 void			simple_sort(t_stack **stack_a, t_stack **stack_b);
+int				get_min(t_stack **stack, int val);
+void			process_sort_3(t_stack **stack_a, t_stack *head,
+					int min, int next_min);
+void			sort_3(t_stack **stack_a);
+void			sort_4(t_stack **stack_a, t_stack **stack_b);
+void			sort_5(t_stack **stack_a, t_stack **stack_b);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ghoyaux <ghoyaux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:26:14 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/02/21 08:00:11 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:39:42 by ghoyaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	start_algo(t_stack *stack_a, t_stack *stack_b, int argc)
 {
 	if (!(stack_a))
 		ft_error();
-	else if (argc <= 10)
+	else if (argc <= 5)
 		simple_sort(&stack_a, &stack_b);
 	else
 		ft_chunk_sort(&stack_a, &stack_b);
