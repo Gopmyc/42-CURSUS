@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_philo.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/27 04:26:41 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/04/27 04:29:52 by ghoyaux          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 int	check_death(t_philo *ph, int i)
@@ -16,8 +28,8 @@ int	check_death(t_philo *ph, int i)
 
 long int	actual_time(void)
 {
-	long int			time;
-	struct timeval		current_time;
+	long int		time;
+	struct timeval	current_time;
 
 	time = 0;
 	if (gettimeofday(&current_time, NULL) == -1)

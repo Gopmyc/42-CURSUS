@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_lib.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/27 04:26:44 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/04/27 04:29:49 by ghoyaux          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 void	ft_putchar_fd(char c, int fd)
@@ -39,7 +51,7 @@ void	ft_putnbr_fd(long int ln, int fd)
 
 int	ft_strlen(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str[i])

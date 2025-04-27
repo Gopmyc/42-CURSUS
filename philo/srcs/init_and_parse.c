@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_and_parse.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/27 04:26:57 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/04/27 04:29:40 by ghoyaux          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 int	ft_atoi(const char *str)
@@ -39,7 +51,7 @@ int	parse_args(int argc, char **argv, t_p *p)
 		p->a.m_eat = -1;
 		if (argc == 6)
 			p->a.m_eat = ft_atoi(argv[5]);
-		if (p->a.total <= 0 || p->a.die <= 0 || p->a.eat <= 0 \
+		if (p->a.total <= 0 || p->a.die <= 0 || p->a.eat <= 0
 			|| p->a.sleep <= 0)
 			return (0);
 		return (1);

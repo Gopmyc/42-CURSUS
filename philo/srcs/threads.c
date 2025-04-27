@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   threads.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/27 04:26:47 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/04/27 04:30:17 by ghoyaux          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 void	*is_dead(void *data)
@@ -9,15 +21,14 @@ void	*is_dead(void *data)
 	{
 		pthread_mutex_lock(&ph->pa->time_eat);
 		pthread_mutex_lock(&ph->pa->finish);
-		if (!ph->finish && ((actual_time() - ph->ms_eat) >= (long)(ph->pa->die)))
+		if (!ph->finish && ((actual_time()
+					- ph->ms_eat) >= (long)(ph->pa->die)))
 		{
 			pthread_mutex_unlock(&ph->pa->finish);
 			pthread_mutex_unlock(&ph->pa->time_eat);
-
 			pthread_mutex_lock(&ph->pa->write_mutex);
 			write_status("died\n", ph);
 			pthread_mutex_unlock(&ph->pa->write_mutex);
-
 			check_death(ph, 1);
 			break ;
 		}
@@ -58,8 +69,9 @@ void	*thread(void *data)
 
 int	threading(t_p *p)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < p->a.total)
 	{
 		p->ph[i].pa = &p->a;

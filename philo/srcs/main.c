@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/27 04:26:54 by ghoyaux           #+#    #+#             */
+/*   Updated: 2025/04/27 04:38:47 by ghoyaux          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 int	ft_exit(char *str)
@@ -44,7 +56,8 @@ void	stop(t_p *p)
 
 int	main(int argc, char **argv)
 {
-	t_p		p;
+	t_p	p;
+	int	i;
 
 	if (!(parse_args(argc, argv, &p)))
 		return (ft_exit("Invalid Arguments\n"));
@@ -52,17 +65,12 @@ int	main(int argc, char **argv)
 	if (!p.ph)
 		return (ft_exit("Malloc returned NULL\n"));
 	if (!initialize(&p) || !threading(&p))
-	{
-		free(p.ph);
-		return (0);
-	}
-	for (int i = 0; i < p.a.total; i++)
-	{
-		if (pthread_create(&p.ph[i].thread_death_id, NULL, is_dead, &p.ph[i]) != 0)
-		{
-			free(p.ph);
-			return (ft_exit("Error creating death thread\n"));
-		}
-	}
+		return (free(p.ph), 0);
+	i = -1;
+	while (++i < p.a.total)
+		if (pthread_create(&p.ph[i].thread_death_id, NULL, is_dead,
+				&p.ph[i]) != 0)
+			return (ft_exit("Error creating death thread\n"), free(p.ph), 0);
 	stop(&p);
+	return (0);
 }
